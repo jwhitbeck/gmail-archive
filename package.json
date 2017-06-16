@@ -1,0 +1,29 @@
+{
+  "name": "gmail-archive",
+  "version": "0.0.1",
+  "description": "A simple CLI tool for saving emails matching a GMail query in maildir format.",
+  "bin": {
+    "gmail-archive": "gmail-archive.js"
+  },
+  "files": [
+    "gmail-archive.js",
+    "LICENSE.txt"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwhitbeck/gmail-archive.git"
+  },
+  "author": "John Whitbeck <john@whitbeck.net>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/jwhitbeck/gmail-archive/issues"
+  },
+  "homepage": "https://github.com/jwhitbeck/gmail-archive#readme",
+  "dependencies": {
+    "googleapis": "26.0.1",
+    "google-auth-library": "1.2.1"
+  }
+}
