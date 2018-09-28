@@ -1,6 +1,6 @@
 {
   "name": "gmail-archive",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple CLI tool for saving emails matching a GMail query in maildir format.",
   "bin": {
     "gmail-archive": "gmail-archive.js"
