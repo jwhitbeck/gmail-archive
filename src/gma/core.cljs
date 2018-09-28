@@ -86,7 +86,7 @@
 
 ;;; Read/write gmail-archive configuration
 
-(def ^:private config-keys [:query :after :before :period])
+(def ^:private config-keys [:query :after :before :period :client-id :client-secret])
 
 (defn- write-config! [ct]
   (let [{:keys [config-file]} ct]
@@ -479,8 +479,8 @@
             (<! (sync-period! fc cfg in-time-window? previously-fetched-ids start-date end-date)))))))
 
 (defn- fetch [fc]
-  (let [{:keys [client-id client-secret tmp-dir]} fc
-        {:keys [period] :as cfg} (read-config fc)
+  (let [{:keys [tmp-dir]} fc
+        {:keys [client-id client-secret period] :as cfg} (read-config fc)
         tokens (read-tokens fc)
         auth (doto (auth.OAuth2Client. client-id client-secret)
                (.setCredentials tokens))
@@ -549,8 +549,6 @@
            :now (t/now)
            :dir dir
            :open "xdg-open"
-           :client-id "667695553924-8q43olovnq1av8v6kgn3lbj1qcj4jbrn.apps.googleusercontent.com"
-           :client-secret "_VprwQkUIK1aU5BpC1Gyapuv"
            :scope "https://www.googleapis.com/auth/gmail.readonly"
            :gma-dir gma-dir
            :tmp-dir (join gma-dir "tmp")
@@ -590,6 +588,8 @@
 
 (def ^:private init-cli-spec
   [["-h" "--help" "Display help."]
+   [nil "--client-id ID" "The Google API client ID (required)."]
+   [nil "--client-secret SECRET" "The Google API client secret (required)."]
    [nil "--dir DIR" "Use this directory as the root of the maildir hierarchy. Defaults to current dir."]
    [nil "--query QUERY"
     (str "Only archive emails matching this GMail query "

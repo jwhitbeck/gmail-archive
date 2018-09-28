@@ -37,8 +37,13 @@ gmail-archive init \
   --dir ~/mail/gifs2017 \
   --query "has:attachment subject:gif" \
   --before 2017-05-01 \
-  --after 2017-04-01
+  --after 2017-04-01 \
+  --client-id <google_client_id> \
+  --client-secret <google_client_secret>
 ```
+
+See below for how to obtain Google API credentials. This will open an OAUTH window in your default browser and
+cache your OAUTH tokens to disk
 
 Then sync the maildir:
 
@@ -78,7 +83,9 @@ First configure the archive.
 gmail-archive init \
   --dir ~/mail/archive \
   --query "-label:inbox" \
-  --period month   # day and year are also available.
+  --period month \
+  --client-id <google_client_id> \
+  --client-secret <google_client_secret>
 ```
 
 We are now ready to sync the archive. The first run will fetch all matching messages, and subsequent runs will
@@ -88,6 +95,22 @@ efficiently fetch only the new messages.
 ```bash
 gmail-archive fetch --dir ~/mail/archive --verbose
 ```
+
+## Obtaining Google API credentials
+
+You need to register gcal-to-org as an application yourself to obtain a _Client ID_ and _Client secret_.
+
+Go to the Google API Manager and create a new project under any name.
+
+Within that project, enable the "GMail" API. There should be a searchbox where you can just enter those
+terms.
+
+In the sidebar, select "Credentials" and then create a new "OAuth Client ID". The application type is "Other".
+
+You’ll be prompted to create a OAuth consent screen first. Fill out that form however you like.
+
+Finally you should have a _Client ID_ and a _Client secret_. Provide these in the config below.
+
 
 ## Notes
 
